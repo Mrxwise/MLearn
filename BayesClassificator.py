@@ -49,7 +49,10 @@ def CheckNaiveBayes(check,attrProMap,labelProba):   # 由朴素贝叶斯条件�
     return ret
 
 #Code View
-data = pd.read_excel('data3.xls', encoding='gbk')   #读取训练数据
-attrProMap,labelProba = NaiveBayesMethod(data)      #生成朴素贝叶斯条件概率
-check = pd.read_excel('BayesCheck.xls', encoding='gbk')  #读取测试数据
-print(CheckNaiveBayes(check,attrProMap,labelProba)) #计算概率
+# data = pd.read_excel('data3.xls', encoding='gbk')   #读取训练数据
+# attrProMap,labelProba = NaiveBayesMethod(data)      #生成朴素贝叶斯条件概率
+# check = pd.read_excel('BayesCheck.xls', encoding='gbk')  #读取测试数据
+# print(CheckNaiveBayes(check,attrProMap,labelProba)) #计算概率
+
+
+# 贝叶斯网络计算 
