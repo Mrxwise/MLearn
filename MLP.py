@@ -61,23 +61,22 @@ def backword(weight_layers, bias_layers, trainX, trainY, learn_rate):
     layer_n = len(weight_layers)
     Loss = 0
     #F = random.randint(0,len(trainX)-1)
-    #for i in range(F,F+1):
-    for i in range(4):#len(trainX)):
+    #for i in range(F,F+1):#len(trainX)):
+    for i in range(len(trainX)):
         yk = trainX[i]
         save_zi = [list(trainX[i])]  #记录zi
-        save_ai = [list(trainX[i])]
-        #save_ai = [list(map(Sigmoid, trainX[i]))]   #记录ai
+        save_ai = [list(trainX[i])]  #记录ai
         for l in range(layer_n):
             yk = np.array(np.dot(yk, weight_layers[l]) + bias_layers[l])  # 得到每一层的yk为一个向量，其中的值代表每一层节点的值
             save_zi.append(yk)
             yk = np.array(list(map(Sigmoid, yk)))   # 将对应的值取Sigmoid
             save_ai.append(list(yk))  # 前向传播计算每一层的yi值
-        Loss += 1/2*np.linalg.norm(trainY[i]-yk)
+        Loss += 1/2*np.linalg.norm(trainY[i]-yk)    #当前数据的损失值计算
         dlossL = (yk - trainY[i]) * np.array(list(map(dSigmoid, save_zi[-1])))  # 由δL = (aL - y) * σ΄'(zL) 计算L层的损失 δL = dC / dzL
-        dlossMatrix = [np.array(dlossL)]
+        dlossMatrix = [np.array(dlossL)]    
         index = 0
         for z in range(layer_n - 1, 0, -1):
-            dlossI = np.dot(dlossMatrix[index],weight_layers[z].T) * np.array(list(map(dSigmoid, save_zi[z])))
+            dlossI = np.dot(dlossMatrix[index],weight_layers[z].T) * np.array(list(map(dSigmoid, save_zi[z])))  #由 δl = (W^[l+1])δ^[l+1]*σ'(z^[])
             index += 1
             dlossMatrix.append(dlossI)
         dlossMatrix.reverse()
